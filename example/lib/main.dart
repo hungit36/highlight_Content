@@ -18,48 +18,36 @@ class LinkServiceExample extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Highlight Link example'),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Center(
-              child: Column(
-                children: [
-                  const LinkService(
-                    onOpen: print,
-                    text: "Today is #Happy ^^ #U",
-                    highlighLinks: [
-                      HashTagLink(),
-                      UserTagLink(),
-                      PhoneLink(),
-                    ],
-                  ),
-                  const SizedBox(height: 64),
-                  SelectableLink(
-                    onOpen: _onOpen,
-                    text:
-                        "Made by https://www.facebook.com/hungnguyen280492/\n\nMail: hungnguyen.it36@gmail.com",
-                  ),
-                  const SizedBox(height: 64),
-                  const LinkService(
-                    onOpen: print,
-                    text: "Contac via @HưngNguyễn     - Mobile: +84963907817     ",
-                    highlighLinks: [
-                      UserTagLink(),
-                      PhoneLink(),
-                    ],
-                  ),
-                ],
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Center(
+                child: Column(
+                  children: [
+                     LinkService(
+                      onOpen: _onOpen,
+                      options: const LinkOptions(showEmail: false, showHashTag: false, showPhoneNumber: false, showUserTag: false),
+                      text: "Today is #Happy ^^ #U\nContac via @HưngNguyễn     - Mobile: +84963907817     facebook.com abc.ai ahhygyt.fgt\nMade by https://www.facebook.com/hungnguyen280492/\n\nMail: hungnguyen.it36@gmail.com facebook.com abc.ai hungnguyen.it36 hungnguyen.it",
+                      
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
   Future<void> _onOpen(LinkableElement link) async {
-    if (!await launchUrl(Uri.parse(link.url))) {
-      throw Exception('Could not launch ${link.url}');
+    if(link.isTag) {
+      debugPrint(link.url);
+    } else {
+      if (!await launchUrl(Uri.parse(link.url))) {
+        throw Exception('Could not launch ${link.url}');
+      }
     }
   }
 }
