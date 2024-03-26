@@ -284,7 +284,7 @@ class LinkService extends StatefulWidget {
       var match = _looseUrlRegex.firstMatch(temp);
       final text = temp.replaceFirst(match!.group(0)!, '');
 
-        if (match.group(1)?.isNotEmpty == true) {
+        if (match.group(1)?.isNotEmpty == true && text.isNotEmpty) {
           if (items.isNotEmpty) {
             items.add(TextElement(beforeCharecter));
           }
@@ -300,9 +300,10 @@ class LinkService extends StatefulWidget {
                   originalUrl;
             }
             if (items.isNotEmpty) {
-              items.add(TextElement(beforeCharecter));
-            }
-            items.add(LinkableElement(temp, originalUrl));
+                items.add(TextElement(beforeCharecter));
+              }
+              items.add(LinkableElement(temp, originalUrl));
+            
           }  else if (originText.isNotEmpty) {
             if (items.isNotEmpty) {
               items.add(TextElement(beforeCharecter));

@@ -28,7 +28,7 @@ class LinkServiceExample extends StatelessWidget {
                      LinkService(
                       onOpen: _onOpen,
                       options: const LinkOptions(showEmail: false, showHashTag: false, showPhoneNumber: false, showUserTag: false),
-                      text: "Today is #Happy ^^ #U\nContac via @HưngNguyễn     - Mobile: +84963907817     facebook.com abc.ai ahhygyt.fgt\nMade by https://www.facebook.com/hungnguyen280492/\n\nMail: hungnguyen.it36@gmail.com facebook.com abc.ai hungnguyen.it36 hungnguyen.it",
+                      text: "Today is #Happy ^^ #U\nContac via @HưngNguyễn     - Mobile: +84963907817     facebook.com abc.ai ahhygyt.fgt\nMade by https://www.facebook.com/hungnguyen280492/\n\nMail: hungnguyen.it36@gmail.com facebook.com abc.ai hungnguyen.it36 http:/hungnguyen.it httpbin.org/anything?json https://httpbin.org/anything?json",
                       
                     ),
                   ],
@@ -45,9 +45,12 @@ class LinkServiceExample extends StatelessWidget {
     if(link.isTag) {
       debugPrint(link.url);
     } else {
-      if (!await launchUrl(Uri.parse(link.url))) {
-        throw Exception('Could not launch ${link.url}');
+      if (await canLaunchUrl(Uri.parse(link.url))) {
+        if (!await launchUrl(Uri.parse(link.url))) {
+          throw Exception('Could not launch ${link.url}');
+        }
       }
+      
     }
   }
 }

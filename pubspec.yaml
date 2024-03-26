@@ -1,6 +1,6 @@
 name: highlight_sevice
 description: Find and replace your link, tag or hashtag.
-version: 0.0.6
+version: 0.0.7
 homepage: 
 
 environment:
